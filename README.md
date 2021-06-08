@@ -1,9 +1,9 @@
 # arduino-proyecto-timbre
-Repositorio para el proyecto timbre hecho en Arduino
+## Repositorio para el proyecto timbre hecho en Arduino
 
 El proyecto timbre consiste de un **Arduino UNO** con un display LCD y un RTC conectados mediante el protocolo I2C, junto con un teclado matricial 4x4 para la entrada de datos.
 
-Usando este teclado matricial, se puede [ EN PROCESO DE SER AGREGADO ] ingresar alarmas para que funcione como timbre.
+Usando este teclado matricial, se puede **[ EN PROCESO DE SER AGREGADO ]** ingresar alarmas para que funcione como timbre.
 
 
 ## La conexión es la siguiente
