@@ -1,8 +1,8 @@
 int mostrarMenuA(DateTime date) {
   char buf1[] = "hh:mm:ss";
   char buf2[] = "DD:MM:YYYY";
-  lcd.setCursor(0, 0);    lcd.println(date.toString(buf1));   Serial.println(date.toString(buf1));
-  lcd.setCursor(0, 1);    lcd.println(date.toString(buf2));   Serial.println(date.toString(buf2)); 
+  lcd.setCursor(0, 0);    lcd.print(date.toString(buf1));   Serial.println(date.toString(buf1));
+  lcd.setCursor(0, 1);    lcd.print(date.toString(buf2));   Serial.println(date.toString(buf2)); 
 }
 
 int mostrarMenuB() {

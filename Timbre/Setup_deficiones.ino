@@ -1,3 +1,5 @@
+// agregar con interrupciones via  hw un boton fisico que con el flanco ascendente (cuando lo detecta),cambie el estado.
+
 #include <LiquidCrystal_I2C.h>
 #include <Keypad.h>
 #include <Wire.h>
@@ -32,20 +34,6 @@ byte pinFilas[cantidadFilas] = {10, 9, 8, 7}; //este es el pinout de las filas d
 byte pinColumnas[cantidadColumnas] = {6, 5, 4, 3}; //este es el pinout de las columnas del teclado
 Keypad keypad = Keypad( makeKeymap(teclas), pinFilas, pinColumnas, cantidadFilas, cantidadColumnas );
 
-void checkStatus() {
-  // si el rtc no se inicializa:
-  if(!rtc.begin()) {
-    lcd.println("No se encontro RTC");
-    abort();
-  }
-  // si el rtc perdio la alimentacion:
-  if(rtc.lostPower()) {
-    // ajusta la fecha y hora al tiempo de compilacion
-    rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
-  }
-  rtc.disable32K();
-}
-
 void setup() {
   Serial.begin(9600);
   checkStatus();
@@ -57,7 +45,6 @@ void setup() {
 void loop() {
   DateTime now = rtc.now();
   key = keypad.getKey();
-  
   switch (key) {
     case 'A':
       mostrarMenuA(now);
@@ -68,5 +55,8 @@ void loop() {
     case 'C':
       mostrarMenuC();
       break;
+  }
+  if (checkearAlarmaIgualHora(now, alarma1) == true) {
+    activarAlarma();
   }
 }
