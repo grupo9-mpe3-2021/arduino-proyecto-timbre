@@ -30,7 +30,8 @@ String agregarAlarma() {
 
 
 bool checkearAlarmaIgualHora(DateTime date, String alarma) {
-  char buffer[] = "hh:mm";
-  date.toString(buffer);
-  return buffer.equals(alarma);
+  char buffer[] = "hh:mm";      // hago un buffer con el formato que quiero para mi hora
+  date.toString(buffer);        // guardo la hora en el buffer
+  String aux = String(buffer);  // convierto mi char[] en String para poder compararlo con la alarma
+  return aux.equals(alarma);    // comparo el string de la linea anterior (o sea, la hora actual) con la hora de la alarma
 }

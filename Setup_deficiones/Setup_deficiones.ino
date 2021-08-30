@@ -15,7 +15,7 @@ String alarma1 = "hh:mm"; //defino el formato de la alarma
 String alarma2 = "hh:mm"; //defino el formato de la alarma
 
 // Variables del RTC :
-int factorCompensacion = 7; // El reloj esta desfasado, esta variable toma en cuenta esa diferencia.
+int factorCompensacion = 7; // El reloj esta desfasado 7 segundos, esta variable toma en cuenta esa diferencia.
 char date[10] = "hh:mm:ss";
 String daysOfTheWeek[7] = { "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" };
 String monthsNames[12] = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
