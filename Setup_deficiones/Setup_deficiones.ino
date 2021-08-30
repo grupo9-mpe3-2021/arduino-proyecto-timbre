@@ -54,9 +54,10 @@ void loop() {
       break;
     case 'C':
       mostrarMenuC();
+      alarma1= agregarAlarma();
       break;
   }
   if (checkearAlarmaIgualHora(now, alarma1) == true) {
-    activarAlarma();
+    Serial.println("la hora es igual a la alarma");  activarAlarma();
   }
 }
