@@ -16,7 +16,9 @@ void checkStatus() {
 int activarAlarma() {  //falta cambiar por millis()
   digitalWrite(timbre, HIGH);   Serial.println("Activando alarma!");
   delay(1000);
+  actual++;
   digitalWrite(timbre, LOW);    Serial.println("Desactivando alarma!");
+ // actual es el parametro donde se fija que alarma elegir. 
 }
 
 
@@ -52,5 +54,28 @@ bool checkearAlarmaIgualHora(DateTime date, String alarma) {
   char buffer[] = "hh:mm";      // hago un buffer con el formato que quiero para mi hora
   date.toString(buffer);        // guardo la hora en el buffer
   String aux = String(buffer);  // convierto mi char[] en String para poder compararlo con la alarma
-  return aux.equals(alarma);    // pregunto si la hora actual y la hora de la alarma son ==   // Si es es asi, devuelve true, en caso contrario, devuelve false
-}
+  //necesito el true de abajo,
+  return aux.equals(alarma[actual]);    // pregunto si la hora actual y la hora de la alarma son ==   // Si es es asi, devuelve true, en caso contrario, devuelve false
+}/*
+int actualizarAlarma(){ 
+      do{ // avanza en el tiempo el orden de las alarmas para que cuando sea necesario que suene la alarma por el horario, que este comparando contra la alarma que corresponde.
+        alarma++;  
+       } while ( alarma[actual] > date ); //falta definir la condicional.
+  }
+
+int ordenarAlarmas(){
+  int c= cantidadDeAlarmas;
+  for (int a=0;a<c;a++){ // C es la cantidad de alarmas.
+    for (int b=a;b<c;b++){
+         if ( alarma[a] < alarma[b] ){
+            alarma[a] = d; d es mi variable auxiliar.
+             
+         }
+    }
+  }
+}*/
+
+
+
+
+ 
