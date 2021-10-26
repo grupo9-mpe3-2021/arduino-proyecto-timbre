@@ -1,85 +1,128 @@
-void mostrarMenuA(DateTime date) {
-  char buf1[] = "hh:mm:ss";
-  char buf2[] = "DD/MM/YYYY";
-  Serial.println(date.toString(buf1));
-  Serial.println(date.toString(buf2));
-  Serial.println("Mostrando menu A");
-  
-  do{ 
-    DateTime now = rtc.now();  
-    lcd.setCursor(0, 0);    lcd.print(date.toString(buf1));   
-    lcd.setCursor(0, 1);    lcd.print(date.toString(buf2));     
-  }while ( key = 'A' );
+void mostrarMenuA() {
+   // mejorar estetica
+   lcd.setCursor (15,0); 
+   if (activacion == true){
+    lcd.print(F("T:Act"));
+   }
+   else if (activacion == false) {
+    lcd.print (F("T:Des"));
+   }
+   
+   DateTime  now = rtc.now();   
+    
+   char buf1[] = "hh:mm:ss";
+   char buf2[] = "DD/MM/YYYY";
+   
+   lcd.setCursor(0, 1);    lcd.print(now.toString(buf1));     //Serial.println(now.toString(buf1));
+   lcd.setCursor(0, 2);    lcd.print(now.toString(buf2));     //Serial.println(now.toString(buf2));
+   lcd.setCursor(0, 3);    lcd.print(F("Prox Alarma: "));     lcd.print(alarma[actual]);     //Serial.println("Siguiente Alarma: ");
+   //delay(999);   //delay para evitar que se pase de rosca el display.    
 }
 
-void mostrarMenuB() {
-  Serial.println("Mostrando menu B");
-  lcd.setCursor(0, 0);    lcd.print("Proximas alarmas:");
-  lcd.setCursor(0, 1);    lcd.print("Alarma 1:");   lcd.print(alarma1);
-  lcd.setCursor(0, 2);    lcd.print("Alarma 2:");   lcd.print(alarma2);
+void  mostrarMenuB() {
+  // ver si funca 
+  lcd.setCursor(0, 0);    lcd.print(F("Proximas alarmas:"));
+  lcd.setCursor(0, 1);    lcd.print(F("Alarma 1:  "));   lcd.print(alarma[actual]);    //Serial.println(F(alarma[actual]));
+  lcd.setCursor(0, 2);    lcd.print(F("Alarma 2:  "));   lcd.print(alarma[actual+1]);  //Serial.println(F(alarma[actual+1]));
+  lcd.setCursor(0, 3);    lcd.print(F("Alarma 3:  "));   lcd.print(alarma[actual+2]);  //Serial.println(F(alarma[actual+2]));
+  for (int i=0 ; i<cantidadAlarmas ; i++){
+    Serial.println (alarma[i]);
+  }
+  
+  keypad.waitForKey();
+  lcd.clear();  
 }
 
 void mostrarMenuC() {
-  Serial.println("Mostrando menu C");
-  lcd.setCursor(0, 0);    lcd.print("Configuracion:");
-  lcd.setCursor(0, 1);    lcd.print("1- Agregar Alarmas");
-  lcd.setCursor(0, 2);    lcd.print("2- Eliminar Alarmas");
-  lcd.setCursor(0, 3);    lcd.print("3- Alarma manual");
-  key = keypad.waitForKey();
+   // ver si funca
+  lcd.setCursor(0, 1);    lcd.print(F("Configuracion:"));
+  lcd.setCursor(0, 2);    lcd.print(F("1- Agregar Alarmas"));
+  lcd.setCursor(0, 3);    lcd.print(F("2- Eliminar Alarmas"));
   
-  /* estoy SEGURO que waitForKey() va a causar un bug, porque va a pausar todo
-  y no te va a permitir ir a a ningun otro menu ni se va a activar la alarma,
-   pero aca se queda hasta que se me ocurra una mejor solucion SOY PISACANE waitForKey() tiene q ser una interrupcion, se puede hacer ya que es via hardware la 
-   activacion de la misma. dsps te mando el cosito que encontre.
-   
-   
-   Hi if we want to listen till a key is pressed and read that pressed value, we dont wanna use the getKey() anymore. Instead use like this
-
-char kpress= keypad.waitForKey();
-
-keypad here refer to the keypad object name you have given earlier. This usage will wait for keypad press event and read the value to kpress char variable.
-
-Bineesh
-
-    basicamente habria que cambiar el getkey que ya tenemos por el waitforkey. al estar de esa manera en teoria deberia seguir funcionando el resto del codigo
-    ya que en teoria funciona en simultaneo. o que directamente loope el menu y que dentro del mismo actualice la hora¿? ademas tene en cuenta de que por
-    como esta configurada la alarma para sonar, la alarma suena cuando llega a tal hora no? pero no especifica el durante, no tiene duracion de alarma. 
-    para el programa, la alarma sucede durante un instante de coincidencia de parametros, (cuando la hora actual es igual a la hora de la alarma). l
-    la duracion de la misma se la damos nosotros cuando metemos la funcion activarAlarma(). al no ser un intervalo, no se que pasaria cuando uno justo realice algo, durante-
-    la hora de la alarma(cuando tenga q sonar).
-   */
-  Serial.println("introducida la tecla ");   Serial.print(key);
+  key = keypad.waitForKey();  Serial.print(F("introducida la tecla "));   Serial.println(key);
   switch (key) {
     case '1':
-      mostrarMenuAgregarAlarma();
+      lcd.clear();
+      mostrarMenuAgregarAlarma(); // corregir funcionamiento
+      alarma[2] = agregarAlarma();
       lcd.clear();
       break;
     case '2':
-      mostrarMenuEliminarAlarma();
+      lcd.clear();
+      mostrarMenuEliminarAlarma(); // corregir funcionamiento
+      //eliminarAlarma();
+      lcd.clear();
+      break; 
+    default:
       lcd.clear();
       break;
-    case '3':
-      activarAlarma();
-      lcd.clear();
-      break;
-    case 'A': // esto de aca no funca correctamente.
-    lcd.clear();
-    break; 
-    case 'B':
-    lcd.clear();
-    break;
-    case 'C':
-    lcd.clear();
-    break;
   }
 }
 
-int mostrarMenuEliminarAlarma(){
-  Serial.println("Mostrando menu de eliminar alarma");
+void mostrarMenuEliminarAlarma(){ // por ahora magia hace esto xd.
+  Serial.println(F("Mostrando menu de eliminar alarma"));
 }
 
-void mostrarMenuAgregarAlarma() {
-  Serial.println("Mostrando menu para agregar alarma");
-  lcd.setCursor(0, 0);    lcd.print("AGREGAR ALARMA ");
-  lcd.setCursor(0, 1);
+int mostrarMenuAgregarAlarma() {
+  Serial.println(F("Mostrando menu para agregar alarma"));
+  lcd.setCursor(0, 0);    lcd.print(F("AGREGAR ALARMA "));
+}
+
+void mostrarMenuD() { // activa el timbre hasta que toques de nuevo D.
+  // ver si funca
+  lcd.setCursor (0,1);
+  lcd.print (F("1-Alarma Automatica"));
+
+  lcd.setCursor (0,2);
+  lcd.print (F("2-Alarma Manual"));
+
+  lcd.setCursor (0,3);
+  lcd.print (F("3-Act/Desact Timbre"));
+  
+  key = keypad.waitForKey(); 
+  switch (key){
+    
+    case '1':
+      lcd.clear();
+      Serial.println(F("Activando caso ,alarma Set1"));
+      activarAlarma();
+    break;
+
+    case '2':
+      lcd.clear();
+      lcd.print(F(" Activando Alarma"));  Serial.println(F("Activando caso ,alarma Set2"));
+      activarAlarma2();
+    break;
+    
+    case '3':
+      lcd.clear();
+      if (activacion == true){
+        
+        lcd.setCursor(3,1);
+        lcd.print("*Advertencia*");
+        
+        lcd.setCursor(0,2);
+        lcd.print(F("Desactivando Alarmas"));  Serial.println(F("La activacion de alarmas fue desactivada."));
+        
+        activacion = false;
+        
+        delay (2000);
+        lcd.clear();
+      }
+      else if (activacion == false){
+        
+        lcd.setCursor(3,1);
+        lcd.print(F("*Advertencia*"));
+        
+        lcd.setCursor(2,2);
+        lcd.print(F("Activando Alarmas"));     Serial.println(F("La activacion de alarmas fue activada."));
+        
+        activacion = true;
+        
+        delay (2000);
+        lcd.clear();    
+      }
+      break;  
+      default: lcd.clear();
+  }
 }
