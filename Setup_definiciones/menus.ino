@@ -44,7 +44,7 @@ void mostrarMenuC() {
     case '1':
       lcd.clear();
       mostrarMenuAgregarAlarma(); // corregir funcionamiento
-      alarma[2] = agregarAlarma();
+      alarma[actual] = agregarAlarma();
       lcd.clear();
       break;
     case '2':
@@ -59,7 +59,7 @@ void mostrarMenuC() {
   }
 }
 
-void mostrarMenuEliminarAlarma(){ // por ahora magia hace esto xd.
+void mostrarMenuEliminarAlarma(){ // TODO: Esta funcion
   Serial.println(F("Mostrando menu de eliminar alarma"));
 }
 

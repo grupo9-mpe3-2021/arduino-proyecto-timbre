@@ -8,17 +8,13 @@
 LiquidCrystal_I2C lcd(0x27,20,4);
 RTC_DS3231 rtc;
 
-
-//String alarma1 = "21:46"; //defino el formato de la alarma
-//String alarma2 = "hh:mm"; //defino el formato de la alarma
-
 int cantidadAlarmas=20; //Cantidad de alarmas. hay que jugar con este valor y size of alarma[] para poder correr bien el codigo. si no se bugea.
 String alarma[20]; //String alarma[cantidadAlarmas];
 bool activacion = true; 
-int actual = 0;//define donde arrancan a sonar las alarmas. 
+int actual = 0;//es un index que define donde arrancan a sonar las alarmas. 
 
 // Variables del RTC :
-int factorCompensacion = 7; // corregir, creo q no hace nada xd. en distintas versiones perdio su utilidad. hay q conectar el rtc a un codigo q solo cargue la hora y desde ahi ajustarla.
+int factorCompensacion = 7;
 char date[10] = "hh:mm:ss";
 String daysOfTheWeek[7] = { "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" };
 String monthsNames[12] = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
@@ -75,12 +71,6 @@ void setup() {
   actualizarAlarma();//necesito que se ponga al corriente segun que alarma es la entrante.
   
   Serial.println(F("Setup finalizado"));
-    
-/* con goto y (retorno): podemos volver a donde querramos, a octi le funciona :D.
- *  podriamos volver de los menus con goto a ver si funciona, es la mejor manera creo yo.
- *  hay que probar, si agrega, si elimina y si suenan las alarmas
- *  estamos peor q sanabria dsps de tirar la silla.
-*/
 }
 
 void loop() {
@@ -108,7 +98,6 @@ void loop() {
       lcd.setCursor (2,0);
       lcd.print(F("Mostrando menu C"));      Serial.println(F("Mostrando menu C"));
       mostrarMenuC();
-      //alarma1= agregarAlarma();
     break;
     
     case 'D': 

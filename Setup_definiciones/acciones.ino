@@ -51,10 +51,6 @@ int activarAlarma2() { //testear funcionamiento.
 }
 
 String agregarAlarma() {
-  
-  lcd.setCursor(0, 1);
-  lcd.print (F("Formato: 'hh:mm'"));    Serial.print(F("Agregando Alarma..."));
-  
   /*
     Esta funcion recibe inputs del teclado y los mete a un String llamado alarma, el cual luego retorna
     Args:
@@ -62,9 +58,9 @@ String agregarAlarma() {
     Returns:
         un String con la hora introducida en el teclado
   */
-  
-  String aux1 = "hh:mm"; //defino el formato de la alarma    //habria que poner esto afuera  <-- no se que quise decir con este comentario, evidentemente con el return se puede hacer miAlarma = agregarAlarma() y listo
-  lcd.setCursor (0,2);
+  lcd.setCursor(0, 1);
+  lcd.print (F("Formato: 'hh:mm'"));    Serial.print(F("Agregando Alarma..."));
+  String aux1 = "hh:mm"; //defino el formato de la alarma
   for (int i = 0 ; i < 5 ; i++) {
     if (aux1[i] != ':') { //para evitar que me sobreescriba el ":"
       aux1[i] = keypad.waitForKey();
@@ -74,23 +70,24 @@ String agregarAlarma() {
   Serial.print(F("Saliendo!!!!"));
   return aux1;
 }
-void actualizarAlarma() { // fija la siguiente alarma luego de un reset o power on.
+void actualizarAlarma() { 
+  // fija la siguiente alarma luego de un reset o power on.
 
   DateTime now = rtc.now();
   
-  char buf4[] = "XX:XX";
-  char buf5[] = "hh:mm";
-  now.toString(buf5);
+  char alarmaVacia[] = "XX:XX";
+  char horaActual[] = "hh:mm";
+  now.toString(horaActual);
   actual = 0;
   int aux2 = 0; 
-  for (int y = 0; y < cantidadAlarmas ; y++){
-    if ( alarma[y].compareTo(buf4) == 0 ){
-      
+  for (int i = 0; i < cantidadAlarmas ; i++){
+    if ( alarma[i].compareTo(alarmaVacia) == 0 ){
+      //TODO Aca va el sort de golmar
     }
   }
-
-  for (int z = 0; z < cantidadAlarmas ; z++) { //alarma[actual].compareTo(buf4) <= 0
-    if ( alarma[actual].compareTo(buf5) <= 0 ) { // permite desactivar y activar las alarmas.
+  //esto hace que actual se loopee entre la cantidad maxima de alarmas
+  for (int i = 0; i < cantidadAlarmas ; i++) { //alarma[actual].compareTo(buf4) <= 0
+    if ( alarma[actual].compareTo(horaActual) <= 0 ) { // permite desactivar y activar las alarmas.
       actual++;
       if (actual == cantidadAlarmas ) {
         actual = 0;
