@@ -52,7 +52,6 @@ void mostrarMenuC() {
       break;
     case '2':
       lcd.clear();
-      //mostrarMenuEliminarAlarma(); // corregir funcionamiento
       eliminarAlarma(mostrarMenuEliminarAlarma());
       lcd.clear();
       break; 

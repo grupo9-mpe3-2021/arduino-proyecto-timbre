@@ -54,15 +54,15 @@ void setup() {
     alarma [5]  = "15:45";
     alarma [6]  = "16:00";
     alarma [7]  = "17:15";
-    alarma [8]  = "22:40";
-    alarma [9]  = "23:54";
+    alarma [8]  = "17:30";
+    alarma [9]  = "18:00";
     
-    alarma [10] = "09:20";
-    alarma [11] = "09:29";
-    alarma [12] = "14:35";
-    alarma [13] = "16:25";
-    alarma [14] = "17:00";
-    alarma [15] = "18:00";
+    alarma [10] = "XX:XX";
+    alarma [11] = "XX:XX";
+    alarma [12] = "XX:XX";
+    alarma [13] = "XX:XX";
+    alarma [14] = "XX:XX";
+    alarma [15] = "XX:XX";
     alarma [16] = "XX:XX";
     alarma [17] = "XX:XX";
     alarma [18] = "XX:XX";

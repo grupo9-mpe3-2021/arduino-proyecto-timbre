@@ -106,7 +106,7 @@ void actualizarAlarma() {
   int aux2 = 0; 
   for (int i = 0; i < cantidadAlarmas ; i++){
     if (alarma[i].compareTo(alarmaVacia) == 0 ){
-      Serial.println(F("Sorteando i guess"));
+      Serial.println(F("Sorteando"));
       sort(alarma, 20); //Aca va el sort de golmar
     }
   }
