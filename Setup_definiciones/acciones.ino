@@ -123,6 +123,13 @@ void actualizarAlarma() {
   Serial.print("Valor de actual: ");    Serial.println(actual); 
 }
 
+void eliminarAlarma(int alarmaABorrar) {
+  Serial.print(F("Recibido que hay que borrar la alarma en la posición "));    Serial.println(alarmaABorrar);
+  alarma[alarmaABorrar-1] = "XX:XX";
+  actualizarAlarma();
+}
+
+
 
 /*
   bool checkearAlarmaIgualHora(DateTime date, String alarma) {

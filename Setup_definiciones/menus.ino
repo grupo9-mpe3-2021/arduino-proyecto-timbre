@@ -52,8 +52,8 @@ void mostrarMenuC() {
       break;
     case '2':
       lcd.clear();
-      mostrarMenuEliminarAlarma(); // corregir funcionamiento
-      //eliminarAlarma();
+      //mostrarMenuEliminarAlarma(); // corregir funcionamiento
+      eliminarAlarma(mostrarMenuEliminarAlarma());
       lcd.clear();
       break; 
     default:
@@ -62,13 +62,22 @@ void mostrarMenuC() {
   }
 }
 
-void mostrarMenuEliminarAlarma(){ // TODO: Esta funcion
+int mostrarMenuEliminarAlarma(){ // TODO: Esta funcion
   Serial.println(F("Mostrando menu de eliminar alarma"));
+  lcd.setCursor(0, 0);    lcd.print(F("ELIMINAR ALARMA"));
+  
+  char input = keypad.waitForKey();
+  lcd.setCursor(0,1);
+  lcd.print(input);
+  int inted_input = input - '0';
+  Serial.print("Tocada la tecla: ");    Serial.println(inted_input);
+  return inted_input;
 }
 
 int mostrarMenuAgregarAlarma() {
   Serial.println(F("Mostrando menu para agregar alarma"));
   lcd.setCursor(0, 0);    lcd.print(F("AGREGAR ALARMA "));
+  
 }
 
 void mostrarMenuD() { // activa el timbre hasta que toques de nuevo D.
