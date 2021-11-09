@@ -19,7 +19,6 @@ void checkStatus() {
 
 int activarAlarma() {  //falta cambiar por millis()
   lcd.clear();
-
   digitalWrite(timbre, HIGH);   Serial.println(F("Activando alarma set1!"));
   lcd.setCursor (2, 1);
   lcd.print(F("Alarma Activada"));
@@ -50,6 +49,19 @@ int activarAlarma2() { //testear funcionamiento.
 
 }
 
+
+void sort(String myArray[], int size) {
+  String auxiliar;
+  for (int i = 0; i < size; ++i) {
+    for (int j = 0; j<(size-1) ; ++j) {
+      if (myArray[j] > (myArray[j + 1])) {
+        auxiliar = (myArray[j + 1]);
+        (myArray[j + 1]) = myArray[j];
+        myArray[j] = auxiliar;
+      }
+    }
+  }
+}
 String agregarAlarma() {
   /*
     Esta funcion recibe inputs del teclado y los mete a un String llamado alarma, el cual luego retorna
@@ -59,18 +71,30 @@ String agregarAlarma() {
         un String con la hora introducida en el teclado
   */
   lcd.setCursor(0, 1);
-  lcd.print (F("Formato: 'hh:mm'"));    Serial.print(F("Agregando Alarma..."));
+  lcd.print (F("Formato hh:mm "));    Serial.println(F("Agregando Alarma..."));
   String aux1 = "hh:mm"; //defino el formato de la alarma
   for (int i = 0 ; i < 5 ; i++) {
     if (aux1[i] != ':') { //para evitar que me sobreescriba el ":"
       aux1[i] = keypad.waitForKey();
       lcd.print(aux1[i]);   Serial.print(F("introducida la tecla "));   Serial.println(aux1[i]);
     }
+    else {
+      lcd.print(aux1[i]);
+    }
   }
-  Serial.print(F("Saliendo!!!!"));
   return aux1;
 }
+
 void actualizarAlarma() { 
+  /*
+   * Esta funcion funciona de la siguiente forma:
+   * TODO de pisacane
+   * 
+   * 
+   * Esta funcion se usa en los siguientes casos:
+   * TODO de pisacane
+   */
+  Serial.println(F("Llamando actualizarAlarma()"));
   // fija la siguiente alarma luego de un reset o power on.
 
   DateTime now = rtc.now();
@@ -81,21 +105,24 @@ void actualizarAlarma() {
   actual = 0;
   int aux2 = 0; 
   for (int i = 0; i < cantidadAlarmas ; i++){
-    if ( alarma[i].compareTo(alarmaVacia) == 0 ){
-      //TODO Aca va el sort de golmar
+    if (alarma[i].compareTo(alarmaVacia) == 0 ){
+      Serial.println(F("Sorteando i guess"));
+      sort(alarma, 20); //Aca va el sort de golmar
     }
   }
+  
   //esto hace que actual se loopee entre la cantidad maxima de alarmas
   for (int i = 0; i < cantidadAlarmas ; i++) { //alarma[actual].compareTo(buf4) <= 0
-    if ( alarma[actual].compareTo(horaActual) <= 0 ) { // permite desactivar y activar las alarmas.
+    if ( alarma[actual].compareTo(horaActual) <= 0 ) { // 
+      Serial.println(F("Haciendo actual ++"));
       actual++;
-      if (actual == cantidadAlarmas ) {
-        actual = 0;
-      }
     }
-    Serial.println (F("alarma actualizada"));
+    Serial.print("alarma ");    Serial.print(i+1);     Serial.print(" actualizada con el valor "); 
+    Serial.println(alarma[i]);
   }
+  Serial.print("Valor de actual: ");    Serial.println(actual); 
 }
+
 
 /*
   bool checkearAlarmaIgualHora(DateTime date, String alarma) {

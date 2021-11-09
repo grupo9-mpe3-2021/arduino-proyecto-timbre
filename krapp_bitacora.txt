@@ -1,0 +1,57 @@
+9-19-2021
+Al buscar como hacer un manual, encontre en esta página web 
+https://instrktiv.com/en/how-to-write-a-manual/ una guia de como hacerlo, entonces se
+me plantean las siguientes preguntas sobre el usuario final:
+
+What describes the user? What is their age, gender etc.?
+	Un usuario final sería un preceptor de cualquier genero, de entre 25 y 55 años, con
+	poco conocimiento informático, y que quiere resolver el problema de usar el timbre
+	lo antes posible así puede seguir con otra labor lo más rápido posible
+
+What tasks do they need to perform?
+	Necesitan que las alarmas suenen a la hora adecuada, haciendo el mínimo trabajo posible.
+
+Why is the task being carried out?
+	Porque se quiere automatizar el proceso de las alarmas
+
+How frequently will it be carried out?
+	Una vez que se configura, no se suele necesitar tocar
+
+In what environment will the product be used?
+	Se va a usar en una preceptoría
+
+Is the user under stress?
+	Por lo general el usuario tiene que hacer otras cosas más importantes
+	que configurar un timbre
+
+Is the product used professionally, commercially or privately?  
+	Se usa de forma comercial.
+
+What technical experiences, qualifications, education, training, knowledge or skills do
+they have? (for example: when you write information about a software update, your
+user most likely has prior experience with the software);
+	La gran mayoría tienen una secundaria terminada.
+
+Does the user have access to the internet? 
+	Si.
+-------
+Luego, se me plantean las siguientes preguntas sobre que cosas tengo que plantear
+a la hora del usuario usando el equipo
+
+What is the intended use?
+What are the names of the most important parts?
+How is the product delivered to the end-user?
+How do I transport and store the product?
+How do I install/mount the product?
+How do I commission the product/make it ready for use?
+How do I use the product?
+How do I change the settings?
+How do I maintain the product?
+How do I repair the product?
+What are the possible errors and how do I solve them?
+How do I dismantle and dispose of the product?
+Are there any spare parts available?
+What are the technical specifications?
+What risks do I encounter during the stages of the product life cycle?
+
+Tambien descubrí que una parte FUNDAMENTAL es cómo resolver los problemas de los usuarios.

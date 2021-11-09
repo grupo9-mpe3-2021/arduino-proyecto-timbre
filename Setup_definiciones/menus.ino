@@ -44,7 +44,10 @@ void mostrarMenuC() {
     case '1':
       lcd.clear();
       mostrarMenuAgregarAlarma(); // corregir funcionamiento
-      alarma[actual] = agregarAlarma();
+      alarma[17] = agregarAlarma();
+      Serial.print(F("Agregada la alarma "));    Serial.print(actual);   Serial.print(F(" con el valor "));
+      Serial.println(alarma[17]);
+      actualizarAlarma();
       lcd.clear();
       break;
     case '2':

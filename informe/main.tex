@@ -25,6 +25,7 @@
 \usepackage{wrapfig}								% paquete para hacer wrapfigure
 \usepackage{pdfpages}							% paquete para incluir pdfs, ya no es usado, pero podria ser util
 \usepackage{tikz}									% paquete para meter un borde en el margen
+\usepackage{fancyhdr}
 %------------------- Configuracion -------------------%
 
 %Estas 3 lineas activan el modo oscuro en el pdf, es hermoso:
@@ -42,6 +43,16 @@
 \graphicspath{{imagenes/}}
 \setcounter{tocdepth}{3}
 
+\pagestyle{fancy}
+\rfoot{Página \thepage}
+\cfoot{}
+\lfoot{Krapp Ramiro --- Golmar Elías --- Pisacane Juan Cruz}
+\renewcommand{\sectionmark}[1]{%
+\markboth{\thesection\quad #1}{}}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{Proyecto Timbre}
+\renewcommand{\headrulewidth}{2pt}
+\renewcommand{\footrulewidth}{1pt}
 %-------------- Formatos de los titulos --------------%
 
 \newcommand{\sectionbreak}{\clearpage}
@@ -173,7 +184,6 @@ del proyecto.
 		\includegraphics[width=\textwidth,keepaspectratio=true] 
 		{diagrama_bloques.pdf}
 	\end{figure} 
-
 
 \section{Componentes del proyecto}
 	\subsection{Arduino}

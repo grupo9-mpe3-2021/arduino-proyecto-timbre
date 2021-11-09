@@ -36,7 +36,7 @@ Keypad keypad = Keypad( makeKeymap(teclas), pinFilas, pinColumnas, cantidadFilas
 
 void setup() {
   Serial.begin(9600);
-
+  pinMode(timbre, OUTPUT);
   // Setup LCD.
   lcd.init();
   lcd.backlight();
@@ -57,9 +57,9 @@ void setup() {
     alarma [8]  = "22:40";
     alarma [9]  = "23:54";
     
-    alarma [10] = "06:30";
-    alarma [11] = "06:35";
-    alarma [12] = "14:25";
+    alarma [10] = "09:20";
+    alarma [11] = "09:29";
+    alarma [12] = "14:35";
     alarma [13] = "16:25";
     alarma [14] = "17:00";
     alarma [15] = "18:00";
@@ -69,7 +69,6 @@ void setup() {
     alarma [19] = "XX:XX";
     
   actualizarAlarma();//necesito que se ponga al corriente segun que alarma es la entrante.
-  
   Serial.println(F("Setup finalizado"));
 }
 
@@ -111,7 +110,7 @@ void loop() {
   
   char buf3[] = "hh:mm";
   now.toString(buf3);   // pasa la hora al string buf3, y elimina los segundos como parametro.
-  Serial.println (buf3); 
+  //Serial.println (buf3); 
   
   if (activacion == true &&  alarma[actual].compareTo(buf3) == 0 ){ // permite desactivar y activar las alarmas.
     activarAlarma();
